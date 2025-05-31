@@ -7,16 +7,16 @@ int main()
     cin >> n;
 
     int digits[100];
-    int size = 0;
+    int cont = 0;
 
-    while(n > 9){
-        digits[size] = n % 8;
-        size++;
+    while(n > 7){
+        digits[cont] = n % 8;
+        cont++;
         n = n / 8;
     }
 
     cout << n;
-    for(int i = size-1; i >= 0; i--){
+    for(int i = cont-1; i >= 0; i--){
         cout << digits[i];
     }
     cout << "\n";

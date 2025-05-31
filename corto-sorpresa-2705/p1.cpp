@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 int main()
@@ -6,16 +6,16 @@ int main()
     int n;
     cin >> n;
 
-    int acum = 0;
+    int acum_principal = 0;
     for(int i = 1; i <= n; i++){
-        int acum2 = 0;
+        int acum = 0;
         for(int j = 1; j <= i; j++){
-            acum2 += j;
+            acum = acum + j;
         }
-        acum += acum2;
+        acum_principal = acum_principal + acum;
     }
 
-    cout << acum << "\n";
+    cout << acum_principal << "\n";
 
     return 0;
 }
