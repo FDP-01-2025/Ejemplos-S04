@@ -1,0 +1,6 @@
+Hacer un programa en C++ que:
+- Use una struct para representar un Pokemon.
+- Use un arreglo de Pokemon para representar tu colección Pokemon.
+- Use una función para atrapar Pokemon.
+- Use una función para liberar un Pokemon.
+- Use una función para consultar el Pokedex de un Pokemon atrapado.
