@@ -79,7 +79,7 @@ int main(void){
     }while(!juego_finalizado);
 
     mostrar_matriz(tablero, 3, 3);
-    cout << ((celdas_ocupadas == 9)?
+    cout << ((celdas_ocupadas != 9)?
                 "Ha ganado el jugador #"+to_string(jugador)+"!!!!!\n"
                 :
                 "El juego terminó en empate :(\n");
