@@ -1,36 +1,11 @@
-#include <iostream>
-#include <fstream>
-#include <chrono>
-#include <thread>
-using namespace std;
-
-typedef struct {
-    char c1;
-    char c2;
-} celda;
-
-typedef struct {
-    string item;
-    int fila;
-    int columna;
-} conexion;
-
-typedef struct {
-    int fila;
-    int columna;
-    char direccion;
-    char c1_substituted;
-    char c2_substituted;
-} posicion;
-
-posicion jugador;
+#include "header.h"
 
 void dormir(int time_ms){
     this_thread::sleep_for(std::chrono::milliseconds(time_ms));
 }
 
 void read_board(celda tablero[][10], int nfilas){
-    ifstream board_file("board.snake");
+    ifstream board_file("resources/board.snake");
 
     char c1, c2;
     for(int i = 0; i < nfilas; i++){
@@ -43,7 +18,7 @@ void read_board(celda tablero[][10], int nfilas){
 }
 
 void read_connections(conexion conexiones[], int tam){
-    ifstream connection_file("connections.snake");
+    ifstream connection_file("resources/connections.snake");
     
     for(int i = 0; i < tam; i++){
         connection_file >> conexiones[i].item >> conexiones[i].fila >> conexiones[i].columna;
@@ -148,7 +123,7 @@ void procesar_nueva_posicion(celda tablero[][10], int nfilas, conexion conexione
     }
     if( celda_actual[0] == 's' ){
         cout << "Te picó una culebra!!!!!\n";
-        dormir(1500);
+        dormir(3000);
         string str_a_buscar = "t" + string(1,celda_actual[1]);
         restaurar_celda(tablero);
         encontrar_conexion(str_a_buscar, conexiones, nconex);
@@ -157,7 +132,7 @@ void procesar_nueva_posicion(celda tablero[][10], int nfilas, conexion conexione
     }
     if( celda_actual[1] == 'd' ){
         cout << "Subiste por una escalera!\n";
-        dormir(1500);
+        dormir(3000);
         string str_a_buscar = string(1, celda_actual[0]) + string(1,'u');
         restaurar_celda(tablero);
         encontrar_conexion(str_a_buscar, conexiones, nconex);
@@ -174,15 +149,8 @@ bool verificar_victoria(){
     return false;
 }
 
-int main(){
-    srand(time(NULL));
+void jugar(celda tablero[][10], int nfilas, conexion conexiones[], int nconex){
     int dado;
-
-    celda tablero[10][10];
-    read_board(tablero, 10);
-
-    conexion conexiones[32];
-    read_connections(conexiones, 32);
 
     jugador.fila = 9;
     jugador.columna = 0;
@@ -200,9 +168,4 @@ int main(){
         colocar_jugador(tablero);
         procesar_nueva_posicion(tablero, 10, conexiones, 32);
     }while(!verificar_victoria());
-
-    mostrar_tablero(tablero, 10);
-    cout << "Gracias por jugar! Vuelva pronto!!\n";
-
-    return 0;
 }
